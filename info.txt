@@ -1,0 +1,1 @@
+src_url=https://www.barandbench.com/stories.rss
