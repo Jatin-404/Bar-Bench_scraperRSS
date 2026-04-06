@@ -43,7 +43,7 @@ async def scrape_now(url: str):
         title="(manual scrape)",
         published=None,
         author=None,
-        category=scraped["category"],
+        category=None,
         full_text=scraped["full_text"],
     )
 
