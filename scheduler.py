@@ -34,7 +34,7 @@ async def _run_once():
                 title=item["title"],
                 published=item["published"],
                 author=item["author"],
-                category=scraped["category"],
+                category=item["category"],   # ← now comes from RSS, not HTML scrape
                 full_text=scraped["full_text"],
             )
 

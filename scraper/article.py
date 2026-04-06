@@ -24,7 +24,6 @@ def scrape_article(url: str) -> dict:
 
     return {
         "full_text": _extract_body(soup),
-        "category": _extract_category(soup),
     }
 
 
@@ -58,22 +57,6 @@ def _extract_body(soup: BeautifulSoup) -> str:
 
     return "\n\n".join(paragraphs)
 
-
-def _extract_category(soup: BeautifulSoup) -> Optional[str]:
-    """
-    Quintype breadcrumb: first <a> tag whose href is a known top-level section.
-    Example: <a href="/news">News</a>  or  <a href="/columns">Columns</a>
-    """
-    TOP_SECTIONS = ("news", "columns", "interviews", "Law-School",
-                    "view-point", "dealstreet", "latest-legal-news")
-
-    for a in soup.find_all("a", href=True):
-        href = a["href"].strip("/")          # "news" or "news/litigation"
-        first_segment = href.split("/")[0]   # always "news"
-        if first_segment in TOP_SECTIONS:
-            return a.get_text(strip=True)    # "News" or "Litigation News"
-
-    return None
 
 def _tag_position(soup: BeautifulSoup, tag) -> int:
     """Returns the index of `tag` among all tags in the document."""
